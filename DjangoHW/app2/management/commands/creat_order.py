@@ -1,38 +1,25 @@
 import decimal
 
 from django.core.management import BaseCommand
-from app2.models import Order
-from random import randint
+from app2.models import Order, User, Product
+from random import randint, choice, choices
 from django.utils.crypto import get_random_string
 
 
 class Command(BaseCommand):
     help = 'the command to create orders'
 
-    def add_arguments(self, parser):
-        parser.add_argument('-c', '--count', type=int, help='the number of orders being created')
-
     def handle(self, *args, **options):
-        count = options['count']
-        if count is not None:
-            for i in range(count):
-                order = Order(
-                    product_name=f'product{i}',
-                    description=get_random_string(100),
-                    price=decimal.Decimal(randint(10, 100)/100),
-                    count_product=randint(1, 100)
+        user = choice(User.objects.all())
+        product = choices(Product.objects.all(), k=5)
+        order = Order(
+                    customer=user,
 
+                    total_price=randint(101, 9999)/100
                 )
-                order.save()
-            self.stdout.write(f'создано {count} заказов')
-        else:
-            i = randint(100, 999)
-            product = Product(
-                product_name=f'product{i}',
-                description=get_random_string(100),
-                price=decimal.Decimal(randint(10, 100) / 10),
-                count_product=randint(1, 100)
 
-            )
-            product.save()
-            self.stdout.write(f'создан 1 пользыватель {product}')
+        order.save()
+        for prod in product:
+            order.products.add(prod)
+
+        self.stdout.write(f'создано  заказов')
