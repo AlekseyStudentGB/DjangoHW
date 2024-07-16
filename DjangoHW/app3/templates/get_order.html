@@ -1,0 +1,14 @@
+{% extends 'basic.html' %}
+{% block content %}
+<h4>Выбрать заказы<br>за поледние:<br></h4>
+<a href="{% url 'get_order' pk=pk days=7 %}">7 дней <br></a>
+<a href="{% url 'get_order' pk=pk days=30 %}">30 дней <br></a>
+<a href="{% url 'get_order' pk=pk days=365 %}">365 дней <br><br><br></a>
+
+<h4>Список зказов за {{ day }} дней</h4>
+    {% for order in orders %}
+
+        <p>заказ от {{ order.date_ordered }} на сумму {{ order.total_price }} <br></p>
+
+{% endfor %}
+{% endblock %}
