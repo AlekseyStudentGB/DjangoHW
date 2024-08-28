@@ -28,3 +28,6 @@ class Order(models.Model):
     products = models.ManyToManyField(Product)
     date_ordered = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def __str__(self):
+        return f'номер : {self.pk};  customer : {self.customer};  price : {self.total_price}'
