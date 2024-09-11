@@ -8,6 +8,10 @@ class User(models.Model):
     user_address = models.CharField(max_length=400)
     reg_date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name: str = 'Пользователь'
+        verbose_name_plural: str = 'Пользователи'
+
     def __str__(self):
         return f'id : {self.pk} user_name:{self.user_name} email :{self.email}'
 
@@ -20,8 +24,12 @@ class Product(models.Model):
     date_add = models.DateTimeField(auto_now_add=True)
     img = models.ImageField(upload_to='products_img/', blank=True)
 
+    class Meta:
+        verbose_name: str = 'Продукт'
+        verbose_name_plural: str = 'Продукты'
+
     def __str__(self):
-        return f'id : {self.pk} product_name:{self.product_name} price :{self.price}'
+        return self.product_name
 
 
 class Order(models.Model):
@@ -29,6 +37,10 @@ class Order(models.Model):
     products = models.ManyToManyField(Product)
     date_ordered = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(max_digits=8, decimal_places=2)
+
+    class Meta:
+        verbose_name: str = 'Заказ'
+        verbose_name_plural: str = 'Заказы'
 
     def __str__(self):
         return f'номер : {self.pk};  customer : {self.customer};  price : {self.total_price}'
