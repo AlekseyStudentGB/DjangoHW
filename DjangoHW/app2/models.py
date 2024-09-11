@@ -13,7 +13,7 @@ class User(models.Model):
         verbose_name_plural: str = 'Пользователи'
 
     def __str__(self):
-        return f'id : {self.pk} user_name:{self.user_name} email :{self.email}'
+        return self.user_name
 
 
 class Product(models.Model):

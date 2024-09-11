@@ -29,7 +29,7 @@ class ProductAdmin(admin.ModelAdmin, ExportAsCSVMixin):
 
 
 @admin.register(User)
-class AdminUser(admin.ModelAdmin,ExportAsCSVMixin):
+class AdminUser(admin.ModelAdmin, ExportAsCSVMixin):
     list_display = ['user_name', 'email', 'reg_date']
     fieldsets = [
         (
@@ -52,26 +52,4 @@ class AdminUser(admin.ModelAdmin,ExportAsCSVMixin):
     readonly_fields = ['reg_date']
     actions = ['export_csv']
 
-    @admin.register(User)
-    class AdminUser(admin.ModelAdmin, ExportAsCSVMixin):
-        list_display = ['user_name', 'email', 'reg_date']
-        fieldsets = [
-            (
-                None,
-                {
-                    'classes': '',
-                    'fields': ['user_name', 'reg_date']
-                }
 
-            ),
-            (
-                'Контакты',
-                {
-                    'classes': ['collapse'],
-                    'description': 'Категория товаров и его описание',
-                    'fields': ['email', 'user_phone', 'user_address']
-                }
-            ),
-        ]
-        readonly_fields = ['date_add']
-        actions = ['export_csv']
