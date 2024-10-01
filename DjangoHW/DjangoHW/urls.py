@@ -24,6 +24,7 @@ urlpatterns = [
     path('sem1/', include('app1.urls')),
     path('', include('app3.urls')),
     path('sem4/', include('app4.urls')),
+    # path('__debug__/', include("debug_toolbar.urls")),
 
 ]
 if settings.DEBUG:
